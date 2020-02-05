@@ -10,9 +10,6 @@ public class Board {
     ArrayList<Piece> pieces = new ArrayList<Piece>(5);
     ArrayList<Square> specialSquares = new ArrayList<>();
     ArrayList<Square> allAttackedSquares = new ArrayList<>();
-    public Board(){
-
-    }
 
     public boolean hasGameEnded(){
         if(this.specialSquares.isEmpty())
@@ -31,7 +28,7 @@ public class Board {
     public void addToPieces(Piece piece){
         this.pieces.add(piece);
     }
-// TODO: dobra tu trzeba przekminic bo to nie ma tak hop siup
+
     public void setCountSpecialsAttacked(){
         this.allAttackedSquares.removeAll(this.allAttackedSquares);
         pieces.forEach(piece -> {
@@ -40,13 +37,10 @@ public class Board {
             this.allAttackedSquares.addAll(piece.getAttackedSquares());
         });
 
-      //  this.allAttackedSquares.forEach(el-> System.out.println("[ "+ el.getX()+" "+el.getY()+" ]"));
-       // System.out.println(this.allAttackedSquares);
+
 
       specialSquares.forEach(specSquare -> {
-          //  System.out.println(this.allAttackedSquares.contains(specSquare));
           specSquare.updateCountAttacks(Collections.frequency(this.allAttackedSquares, specSquare));
-            System.out.println(Collections.frequency(this.allAttackedSquares, specSquare));
         });
 
     }
@@ -81,12 +75,6 @@ public class Board {
 
     public Square getBoardSquare(int x, int y){
         return this.boardSquares.get(x*8+y);
-    }
-
-    public void showContent(){
-        for(int i = 0; i < 8; i++)
-            for(int j = 0; j < 8; j++)
-                System.out.println(this.getBoardSquare(i, j).x + " " + this.getBoardSquare(i, j).y + this.getBoardSquare(i, j).getPiece()+ "\n");
     }
 
 

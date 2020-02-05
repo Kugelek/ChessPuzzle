@@ -50,14 +50,13 @@ public class SaveToFileController extends JButton {
 
         public void saveToFile() throws FileNotFoundException{
 
+            PrintWriter zapis = new PrintWriter(this.fileName);
 
-                PrintWriter zapis = new PrintWriter(this.fileName);
+            String boardAsString = String.join(" ", this.stringifyBoardState());
+            zapis.println(boardAsString);
+            zapis.println(this.stringifyHistory());
 
-                String boardAsString = String.join(" ", this.stringifyBoardState());
-                zapis.println(boardAsString);
-                zapis.println(this.stringifyHistory());
-
-                zapis.close();
+            zapis.close();
 
         }
 
@@ -75,7 +74,6 @@ public class SaveToFileController extends JButton {
             }
 
            return boardChars;
-
         }
 
         public String stringifyHistory(){

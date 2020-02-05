@@ -75,17 +75,10 @@ public class LoadFromFileController extends JButton {
 
 
         public void loadFromFile() throws IOException {
-
-//            Scanner odczyt = new Scanner(new File(this.fileName));
-//            String text = odczyt.nextLine();
-
             List<String> lines = Files.readAllLines(Paths.get(this.fileName), StandardCharsets.UTF_8);
-
             this.boardSymbols = lines.get(0).replace(" ", "").toCharArray();
             lines.remove(0);
             this.history = lines;
-            System.out.println(this.boardSymbols);
-            System.out.println(lines);
 
         }
 
@@ -123,38 +116,27 @@ public class LoadFromFileController extends JButton {
             String str = String.join("", this.history);
             String[] arr = str.split("END");
 
-            char[] returnableMoves;
-            char[] allMoves;
+            char[] returnableMoves = null;
+            char[] allMoves = null;
 
             if(arr.length > 0)
                 allMoves = arr[0].replaceAll(" ", "").toCharArray();
-            else
-                allMoves = null;
 
             if(arr.length == 2)
                 returnableMoves = arr[1].replaceAll(" ", "").toCharArray();
-            else{
-                returnableMoves = null;
-            }
-
 
             if(arr.length > 0)
-            for(int i = 0; i < allMoves.length; i=i+5){
-                this.mh.addMove(new Move(this.getPiece(allMoves[i]), Character.getNumericValue(allMoves[i+1]), Character.getNumericValue(allMoves[i+2]), Character.getNumericValue(allMoves[i+3]), Character.getNumericValue(allMoves[i+4])));
-            }
+                for(int i = 0; i < allMoves.length; i=i+5)
+                    this.mh.addMove(new Move(this.getPiece(allMoves[i]), Character.getNumericValue(allMoves[i+1]), Character.getNumericValue(allMoves[i+2]), Character.getNumericValue(allMoves[i+3]), Character.getNumericValue(allMoves[i+4])));
+
             if(arr.length == 2)
-            for(int i = 0; i < returnableMoves.length; i=i+5){
-                this.mh.addReturnableMove(new Move(this.getPiece(returnableMoves[i]), Character.getNumericValue(returnableMoves[i+1]), Character.getNumericValue(returnableMoves[i+2]), Character.getNumericValue(returnableMoves[i+3]), Character.getNumericValue(returnableMoves[i+4])));
-            }
-
-
+                for(int i = 0; i < returnableMoves.length; i=i+5)
+                    this.mh.addReturnableMove(new Move(this.getPiece(returnableMoves[i]), Character.getNumericValue(returnableMoves[i+1]), Character.getNumericValue(returnableMoves[i+2]), Character.getNumericValue(returnableMoves[i+3]), Character.getNumericValue(returnableMoves[i+4])));
 
 
            MoveHistoryView mhv = new MoveHistoryView(this.area, this.areaReturnable);
            mhv.printMoveHistory(this.mh);
            mhv.printReturnableMoves(this.mh);
-
-
         }
 
 
@@ -221,7 +203,6 @@ public class LoadFromFileController extends JButton {
             this.board.getSquares().forEach(square ->{ square.removePiece();
             });
             this.board.getPieces().removeAll(this.board.getPieces());
-            System.out.println(this.board.getPieces());
 
 
             this.boardViewObject.eraseSquares();
