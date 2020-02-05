@@ -57,7 +57,7 @@ public class LoadFromFileController extends JButton {
         }
 
         public void actionPerformed(ActionEvent e){
-
+            boardViewObject.unmarkAllSquares();
             this.fileName = this.field.getText();
 
 

@@ -37,6 +37,7 @@ public class ResetController extends JButton {
 
 
         public void actionPerformed(ActionEvent e){
+            boardViewObject.unmarkAllSquares();
             this.cleanBoard();
             System.out.println(this.board.getSpecialSquares());
             this.randomSpecialSquares();

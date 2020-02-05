@@ -32,9 +32,12 @@ public class MoveBackwardController extends JButton {
             this.mh = mh;
             this.area = area;
             this.areaReturnable = areaReturnable;
+
         }
 
         public void actionPerformed(ActionEvent e){
+
+            boardViewObject.unmarkAllSquares();
 
             if(!this.mh.isHistoryEmpty()){
                 MoveHistoryView mhv = new MoveHistoryView(this.area, this.areaReturnable);
