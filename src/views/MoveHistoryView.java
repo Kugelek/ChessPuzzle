@@ -19,7 +19,7 @@ public class MoveHistoryView {
     public void printMoveHistory(MoveHistory moveHistory){
         String allMovesStringified = "";
         ArrayList<String> allRows = new ArrayList<String>();
-        System.out.println(moveHistory.getAllmoves());
+
 
 
         moveHistory.getAllmoves().forEach(move -> {

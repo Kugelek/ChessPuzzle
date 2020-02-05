@@ -39,7 +39,6 @@ public class ResetController extends JButton {
         public void actionPerformed(ActionEvent e){
             boardViewObject.unmarkAllSquares();
             this.cleanBoard();
-            System.out.println(this.board.getSpecialSquares());
             this.randomSpecialSquares();
             this.randomPiecesInit();
             this.cleanHistory();
@@ -64,17 +63,14 @@ public class ResetController extends JButton {
                 board.getBoardSquare(x,y).setSpecial();
             }
 
-            System.out.println(this.board.getSpecialSquares());
             boardViewObject.printSpecials(board.getSpecialSquares());
         }
 
         public void randomPiecesInit(){
-//
-//            int[] xArr = new int[5];
-//            int[] yArr = new int[5];
+
             //empty squares
-            int x = (int)(Math.random() * 8);
-            int y = (int)(Math.random() * 8);
+            int x;
+            int y;
             ArrayList<Integer> xArr = new ArrayList<Integer>();
             ArrayList<Integer> yArr = new ArrayList<Integer>();
             while(xArr.size() != 5){
@@ -86,9 +82,8 @@ public class ResetController extends JButton {
                 }
             }
 
-//           xArr.forEach(el->System.out.println("XD" + el));
-//           yArr.forEach(el->System.out.println("YD" + el));
-            System.out.println(xArr + " " + yArr);
+
+
 
             Piece king = new King('K', board.getBoardSquare(xArr.get(0),yArr.get(0)), board);
             Piece queen = new Queen('Q', board.getBoardSquare(xArr.get(1), yArr.get(1)),board);
@@ -135,7 +130,7 @@ public class ResetController extends JButton {
             this.board.getSquares().forEach(square ->{ square.removePiece();
             });
             this.board.getPieces().removeAll(this.board.getPieces());
-            System.out.println(this.board.getPieces());
+
 
 
             this.boardViewObject.eraseSquares();

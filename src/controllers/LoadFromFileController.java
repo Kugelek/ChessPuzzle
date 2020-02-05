@@ -112,7 +112,6 @@ public class LoadFromFileController extends JButton {
         }
 
         public void loadHistory(){
-            System.out.println(this.history);
             String str = String.join("", this.history);
             String[] arr = str.split("END");
 
