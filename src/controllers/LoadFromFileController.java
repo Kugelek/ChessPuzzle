@@ -122,62 +122,38 @@ public class LoadFromFileController extends JButton {
             System.out.println(this.history);
             String str = String.join("", this.history);
             String[] arr = str.split("END");
-            char[] allMoves = arr[0].replaceAll(" ", "").toCharArray();
 
-            char[] returnableMoves = arr[1].replaceAll(" ", "").toCharArray();
+            char[] returnableMoves;
+            char[] allMoves;
+
+            if(arr.length > 0)
+                allMoves = arr[0].replaceAll(" ", "").toCharArray();
+            else
+                allMoves = null;
+
+            if(arr.length == 2)
+                returnableMoves = arr[1].replaceAll(" ", "").toCharArray();
+            else{
+                returnableMoves = null;
+            }
 
 
-            System.out.println(allMoves[3] + " XD "+returnableMoves[5]);
-            System.out.println(allMoves[2] + " XD "+returnableMoves[6]);
-            System.out.println(allMoves[1] + " XD "+returnableMoves[7]);
-            System.out.println(returnableMoves.length);
-            System.out.println(allMoves.length);
+            if(arr.length > 0)
             for(int i = 0; i < allMoves.length; i=i+5){
                 this.mh.addMove(new Move(this.getPiece(allMoves[i]), Character.getNumericValue(allMoves[i+1]), Character.getNumericValue(allMoves[i+2]), Character.getNumericValue(allMoves[i+3]), Character.getNumericValue(allMoves[i+4])));
             }
+            if(arr.length == 2)
             for(int i = 0; i < returnableMoves.length; i=i+5){
                 this.mh.addReturnableMove(new Move(this.getPiece(returnableMoves[i]), Character.getNumericValue(returnableMoves[i+1]), Character.getNumericValue(returnableMoves[i+2]), Character.getNumericValue(returnableMoves[i+3]), Character.getNumericValue(returnableMoves[i+4])));
             }
-              //        this.history.forEach(move -> {
-//                if(!move.equals("END")) {
-//                    char[] letters = move.replaceAll(" ", "").toCharArray();
-//                    if (this.history.contains("END")) {
-//                        this.mh.addMove(new Move(this.getPiece(letters[0]), letters[1], letters[2], letters[3], letters[4]));
-//                    }else {
-//                        this.mh.addReturnableMove(new Move(this.getPiece(letters[0]), letters[1], letters[2], letters[3], letters[4]));
-//                    }
-//                }
-              //  this.history.remove(move);
-      //      });
 
 
 
-//            for(String move : this.history){
-//                if(move == "END")
-//                    break;
-//                char[] letters = move.replaceAll(" ", "").toCharArray();
-//                this.mh.addMove(new Move(this.getPiece(letters[0]),letters[1], letters[2],letters[3],letters[4]));
-//                this.history.remove(move);
-//            }
-//            for(String returnableMove : this.history){
-//                char[] letters = returnableMove.replaceAll(" ", "").toCharArray();
-//                this.mh.addReturnableMove(new Move(this.getPiece(letters[0]),letters[1], letters[2],letters[3],letters[4]));
-//                this.history.remove(returnableMove);
-//
-//            }
-//
 
-            System.out.println(this.mh.getAllmoves());
            MoveHistoryView mhv = new MoveHistoryView(this.area, this.areaReturnable);
            mhv.printMoveHistory(this.mh);
            mhv.printReturnableMoves(this.mh);
 
-
-
-
-
-//            moveHistory.removeAllReturnableMoves();
-//            mhv.printReturnableMoves(moveHistory);
 
         }
 
